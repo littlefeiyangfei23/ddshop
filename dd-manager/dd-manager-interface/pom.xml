@@ -11,6 +11,7 @@
     <packaging>jar</packaging>
     <artifactId>dd-manager-interface</artifactId>
 
+    <!--1111111111111111111111111111111111111-->
     <!--service层接口依赖-->
      <dependencies>
          <dependency>
