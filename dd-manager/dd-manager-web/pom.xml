@@ -45,6 +45,8 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
+
+                <!--这里多配置几个端口，比如8081，就是可以开两个端口了-->
                 <configuration>
                     <port>8080</port>
                     <!---->
