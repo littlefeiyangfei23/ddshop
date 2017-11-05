@@ -12,7 +12,7 @@
     <artifactId>dd-manager-dao</artifactId>
 
     <dependencies>
-      <!--pojo,mybatis，mysql,spring,(junit和spring整合测试)的相关包:相关包已经移动到dd-manager中了-->
+        <!--pojo,mybatis，mysql,spring,(junit和spring整合测试)的相关包:相关包已经移动到dd-manager中了-->
         <!--pojo-->
         <dependency>
             <groupId>com.qf.ddshop</groupId>
@@ -46,4 +46,19 @@
 
 
     </dependencies>
+
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+
 </project>

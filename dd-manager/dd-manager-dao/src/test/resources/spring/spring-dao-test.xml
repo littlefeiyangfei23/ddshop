@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+    ">
+    <!--1 读取数据库配置文件-->
+    <!--<context:之后选取对用属性,会在上面自动导入头文件的-->
+    <context:property-placeholder location="classpath:db-test.properties"/>
+
+    <!--2 创建数据库连接池-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!--基本属性-->
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!--优化属性-->
+        <!--下面很可能还有有一大堆-->
+        <!--关闭自动提交-->
+        <property name="defaultAutoCommit" value="false"/>
+    </bean>
+
+    <!--3 创建mybatis的会话工厂-->
+    <!--SqlSessionFactoryBean在mybatis-springjar包。-->
+    <!--Ctrl+鼠标已过去，可以看SqlSessionFactoryBean是属于哪个jar包-->
+    <!--通过.class看.java文件就是反编译-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据源-->
+        <!--ref是引用-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--注入mybatis的主配置文件-->
+        <property name="configLocation" value="classpath:mybatis/mybatis-config-test.xml"/>
+        <!--自动扫描dao里面的所有的Mapper.xml-->
+        <!--这里的value里面用/隔开-->
+        <property name="mapperLocations" value="classpath*:com/qf/ddshop/dao/*Mapper.xml"/>
+    </bean>
+
+    <!--4 配置扫描DAO层接口，配置了这个类之后就不需要再对接口进行实现(不需要再写接口的实现类)-->
+    <!--一个别人不用的bean是不需要ID的-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--注入会话工厂-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--DAO层所在的包-->
+        <!--这里的value里面用.隔开-->
+        <property name="basePackage" value="com.qf.ddshop.dao"/>
+    </bean>
+
+    <!--5 扫描DAO层下注解类,可以扫描到base-package的当前包以及子包的所有注解类,dao及其子包都可以被扫描-->
+    <context:component-scan base-package="com.qf.ddshop.dao"/>
+
+</beans>
