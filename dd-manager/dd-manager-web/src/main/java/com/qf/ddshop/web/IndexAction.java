@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IndexAction {
 
     @RequestMapping("/")
-//    这里这个注释，有没有一个样
-    @ResponseBody
     public String index(){
         return "index";
     }

@@ -41,16 +41,16 @@
 
 
 
-        <!-- Json处理工具包，Jackson -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <!-- ueditor使用 -->
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-        </dependency>
+        <!--&lt;!&ndash; Json处理工具包，Jackson &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+            <!--<artifactId>jackson-databind</artifactId>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; ueditor使用 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.json</groupId>-->
+            <!--<artifactId>json</artifactId>-->
+        <!--</dependency>-->
     </dependencies>
     <build>
         <finalName>dd-manager-web</finalName>

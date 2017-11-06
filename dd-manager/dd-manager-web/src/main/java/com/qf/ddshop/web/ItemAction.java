@@ -29,4 +29,10 @@ public class ItemAction {
         return  tbItem;
 
     }
+
+//    day06下午的代码，有个item-add传过来，被/{page}接收
+    @RequestMapping("/{page}")
+    public String page(@PathVariable("page") String page){
+        return page;
+    }
 }
