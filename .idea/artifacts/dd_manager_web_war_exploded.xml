@@ -24,6 +24,10 @@
             <element id="module-output" name="dd-manager-interface" />
           </element>
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.4.3" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.4.0" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.4.3" />
+          <element id="library" level="project" name="Maven: org.json:json:20160212" />
           <element id="archive" name="dd-common-1.0-SNAPSHOT.jar">
             <element id="module-output" name="dd-common" />
           </element>
