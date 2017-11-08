@@ -54,6 +54,12 @@
 <script src="js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
 <%--语言包，可以翻译成中文--%>
 <script src="js/jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+<%--引入日期处理库--%>
+<script src="js/moment/moment-with-locales.js"></script>
+<%--加上中文字符集，不加的话，不会显示中文，zh是中文的意思。cn是国家或者地区的名称--%>
+<script>
+    moment.locale('zh-cn');
+</script>
 
 
 <!-- 自定义脚本 -->

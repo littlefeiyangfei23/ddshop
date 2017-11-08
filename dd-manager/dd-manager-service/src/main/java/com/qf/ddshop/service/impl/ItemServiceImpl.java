@@ -5,6 +5,7 @@ import com.qf.ddshop.common.dto.Result;
 import com.qf.ddshop.dao.TbItemCustomMapper;
 import com.qf.ddshop.dao.TbItemMapper;
 import com.qf.ddshop.pojo.po.TbItem;
+import com.qf.ddshop.pojo.po.TbItemExample;
 import com.qf.ddshop.pojo.vo.TbItemCustom;
 import com.qf.ddshop.service.ItemService;
 import org.slf4j.Logger;
@@ -66,5 +67,31 @@ public class ItemServiceImpl  implements ItemService {
             e.printStackTrace();
         }
         return result;
+    }
+
+    @Override
+    public int updateBatch(List<Long> ids) {
+        int i = 0;
+        try {
+            //准备商品对象，这个对象包含了状态为3的字段
+            TbItem record = new TbItem();
+            record.setStatus((byte) 3);
+
+            //创建更新模板 update tb_item set status=? where id in (?,?,?),现在还什么都没有
+            // 下面3行创建了查询模板
+            TbItemExample example = new TbItemExample();
+//            TbItemExample里面有个内部类是Criteria，创建一个查询对象
+            TbItemExample.Criteria criteria = example.createCriteria();
+//            下面函数的参数是Long型的数组，ids符合条件，给查询对象加内容
+//            执行完下面这一行，意味着ids已经填充了上面sql语句的后面的？
+            criteria.andIdIn(ids);
+            //执行更新，这个方法在Mapper.xml里面是动态sql的
+//            执行完下面这一行，意味着已经填充了上面sql语句的前面的？
+            i = itemDao.updateByExampleSelective(record, example);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
     }
 }

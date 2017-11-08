@@ -18,4 +18,7 @@ public interface ItemService {
      * @return
      */
     Result<TbItemCustom> listItemsByPage(Page page);
+
+//    批量修改
+    int updateBatch(List<Long> ids);
 }

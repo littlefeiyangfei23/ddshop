@@ -13,7 +13,7 @@
 
 
     <!--@RequestMapping @ResponseBody需要下面代码的支持 jackson转换成JSON-->
-    <!--下面这行话的功能参见spring头文件链接指向的网页-->
+    <!--下面这行话的功能参见spring头文件链接指向的网页,;里面自带转换器的。-->
     <!--对象转化为JSON就是序列化-->
     <mvc:annotation-driven/>
 
