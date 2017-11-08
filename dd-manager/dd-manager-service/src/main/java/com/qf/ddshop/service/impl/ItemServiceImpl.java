@@ -94,4 +94,41 @@ public class ItemServiceImpl  implements ItemService {
         }
         return i;
     }
+
+    @Override
+    public int updateBatchAdd(List<Long> ids) {
+        int i = 0;
+        try {
+            TbItem record = new TbItem();
+            record.setStatus((byte) 1);
+
+            TbItemExample example = new TbItemExample();
+            TbItemExample.Criteria criteria = example.createCriteria();
+            criteria.andIdIn(ids);
+            i = itemDao.updateByExampleSelective(record, example);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+
+    @Override
+    public int updateBatchbatchRemove(List<Long> ids) {
+        int i = 0;
+        try {
+            TbItem record = new TbItem();
+            record.setStatus((byte) 2);
+
+            TbItemExample example = new TbItemExample();
+            TbItemExample.Criteria criteria = example.createCriteria();
+            criteria.andIdIn(ids);
+            i = itemDao.updateByExampleSelective(record, example);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
+    }
 }

@@ -82,6 +82,35 @@ public class ItemAction {
         return i;
     }
 
+    @ResponseBody
+    @RequestMapping("/items/batchAdd")
+    // @RequestParam把长整型的数组直接转成List，底层有地方要用list，这里用这springMVC的转换器先转化了，方便了
+    public int updateBatchAdd(@RequestParam("ids[]") List<Long> ids){
+        int i = 0;
+        try {
+            i = itemService.updateBatchAdd(ids);
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/items/batchRemove")
+    // @RequestParam把长整型的数组直接转成List，底层有地方要用list，这里用这springMVC的转换器先转化了，方便了
+    public int updateBatchbatchRemove(@RequestParam("ids[]") List<Long> ids){
+        int i = 0;
+        try {
+            i = itemService.updateBatchbatchRemove(ids);
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return i;
+    }
+
 
 
 }

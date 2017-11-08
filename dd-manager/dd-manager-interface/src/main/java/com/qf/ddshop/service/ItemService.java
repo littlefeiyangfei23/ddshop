@@ -21,4 +21,8 @@ public interface ItemService {
 
 //    批量修改
     int updateBatch(List<Long> ids);
+
+    int updateBatchAdd(List<Long> ids);
+
+    int updateBatchbatchRemove(List<Long> ids);
 }

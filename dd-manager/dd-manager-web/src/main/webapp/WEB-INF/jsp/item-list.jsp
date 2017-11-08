@@ -62,13 +62,97 @@
         iconCls: 'icon-up',
         text: '上架',
         handler: function () {
-            console.log('up');
+            //            getSelections返回所有被选中的行，如果没有选中的行则返回null,这是一个方法
+            var selections = $('#dg').datagrid('getSelections');
+            console.log(selections);
+            if (selections.length == 0) {
+                //客户没有选择记录
+                $.messager.alert('提示', '请至少选中一条记录！');
+//                直接结束
+                return;
+            }
+//            if (selections.status == 1) {
+//                //客户没有选择记录
+//                $.messager.alert('提示', '该商品已经上架！');
+////                直接结束
+//                return;
+//            }
+            //至少选中了一条记录
+            //确认框，第一个参数为标题，第二个参数确认框的提示内容，第三参数是一个确认函数
+            //function(r) 如果用户点击的是"确定"，那么r=true
+            $.messager.confirm('确认', '您确认想要上架该商品吗？', function (r) {
+                if (r) {
+                    //为了存放id的集合，定义数组
+                    var ids = [];
+                    //遍历选中的记录，将记录的id存放到js数组中
+                    for (var i = 0; i < selections.length; i++) {
+                        ids.push(selections[i].id);
+                    }
+//                    $ajax是爸爸，$get是大儿子，$post是小儿子，还有其他儿子的
+                    //把ids异步提交到后台
+                    $.post(
+                        //url:请求后台的哪个地址来进行处理，相当于url,String类型,这个参数是不可缺少的
+                        'items/batchAdd',
+                        //data:从前台提交哪些数据给后台处理，相当于data，Object类型
+                        {'ids[]':ids},
+                        //callback:后台处理成功的回调函数，相当于success，function类型
+                        function(data){
+                            $('#dg').datagrid('reload');
+                        },
+                        //dataType:返回的数据类型，如：json，String类型
+                        'json'
+                    );
+
+                }
+            });
         }
     }, {
         iconCls: 'icon-down',
         text: '下架',
         handler: function () {
-            console.log('down');
+            //            getSelections返回所有被选中的行，如果没有选中的行则返回null,这是一个方法
+            var selections = $('#dg').datagrid('getSelections');
+            console.log(selections);
+            if (selections.length == 0) {
+                //客户没有选择记录
+                $.messager.alert('提示', '请至少选中一条记录！');
+//                直接结束
+                return;
+            }
+//            if (selections.status == 1) {
+//                //客户没有选择记录
+//                $.messager.alert('提示', '该商品已经上架！');
+////                直接结束
+//                return;
+//            }
+            //至少选中了一条记录
+            //确认框，第一个参数为标题，第二个参数确认框的提示内容，第三参数是一个确认函数
+            //function(r) 如果用户点击的是"确定"，那么r=true
+            $.messager.confirm('确认', '您确认想要下架该商品吗？', function (r) {
+                if (r) {
+                    //为了存放id的集合，定义数组
+                    var ids = [];
+                    //遍历选中的记录，将记录的id存放到js数组中
+                    for (var i = 0; i < selections.length; i++) {
+                        ids.push(selections[i].id);
+                    }
+//                    $ajax是爸爸，$get是大儿子，$post是小儿子，还有其他儿子的
+                    //把ids异步提交到后台
+                    $.post(
+                        //url:请求后台的哪个地址来进行处理，相当于url,String类型,这个参数是不可缺少的
+                        'items/batchRemove',
+                        //data:从前台提交哪些数据给后台处理，相当于data，Object类型
+                        {'ids[]':ids},
+                        //callback:后台处理成功的回调函数，相当于success，function类型
+                        function(data){
+                            $('#dg').datagrid('reload');
+                        },
+                        //dataType:返回的数据类型，如：json，String类型
+                        'json'
+                    );
+
+                }
+            });
         }
     }];
 
@@ -133,7 +217,10 @@
 //                不会找monment.js官网
                 return moment(value).format('LL');
             }},
-            {field: 'updated', title: '修改时间', width: 100}
+            {field: 'updated', title: '修改时间', width: 100,formatter:function (value,row,index) {
+                return moment(value).format('LL');
+
+            }}
         ]]
     });
 
