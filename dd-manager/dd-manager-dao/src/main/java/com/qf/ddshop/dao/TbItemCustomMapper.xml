@@ -23,9 +23,14 @@
     LEFT JOIN tb_item_cat c ON i.cid = c.id
     where i.status != 3
     <choose>
-      <when test="order != null and order.sort != null and order.order != null">
---         中文排序解决
-        ORDER BY  CONVERT(i.${order.sort} USING gbk)  ${order.order}
+      <when test="order != null and order.sort != null and order.order != null ">
+
+         /* 中文排序解决
+          ORDER BY  CONVERT(i.${order.sort} USING gbk)  ${order.order}*/
+         <foreach collection="order.orderParams" item="item" open=" order by" close="" separator=",">
+--            order by i.title asc ,i.price asc
+           i.${item}
+         </foreach>
       </when>
       <otherwise>
         ORDER BY i.id DESC
