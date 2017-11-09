@@ -1,5 +1,6 @@
 package com.qf.ddshop.service.impl;
 
+import com.qf.ddshop.common.dto.Order;
 import com.qf.ddshop.common.dto.Page;
 import com.qf.ddshop.common.dto.Result;
 import com.qf.ddshop.dao.TbItemCustomMapper;
@@ -51,7 +52,7 @@ public class ItemServiceImpl  implements ItemService {
     }
 
     @Override
-    public Result<TbItemCustom> listItemsByPage(Page page) {
+    public Result<TbItemCustom> listItemsByPage(Page page, Order order) {
         Result<TbItemCustom> result = null;
         try {
             //1 创建一个响应参数实体类
@@ -60,7 +61,7 @@ public class ItemServiceImpl  implements ItemService {
             int total = itemCustomDao.countItems();
             result.setTotal(total);
             //3 对rows进行设值(指定页码显示记录集合)
-            List<TbItemCustom> list = itemCustomDao.listItemsByPage(page);
+            List<TbItemCustom> list = itemCustomDao.listItemsByPage(page,order);
             result.setRows(list);
         }catch (Exception e) {
             logger.error(e.getMessage(), e);

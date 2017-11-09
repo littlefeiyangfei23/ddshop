@@ -1,6 +1,7 @@
 package com.qf.ddshop.web;
 
 
+import com.qf.ddshop.common.dto.Order;
 import com.qf.ddshop.common.dto.Page;
 import com.qf.ddshop.common.dto.Result;
 import com.qf.ddshop.pojo.po.TbItem;
@@ -55,10 +56,10 @@ public class ItemAction {
 
     @ResponseBody
     @RequestMapping("/items")
-    public Result<TbItemCustom> listItemsByPage(Page page){
+    public Result<TbItemCustom> listItemsByPage(Page page, Order order){
         Result<TbItemCustom> list = null;
         try {
-            list = itemService.listItemsByPage(page);
+            list = itemService.listItemsByPage(page,order);
         }catch (Exception e) {
             logger.error(e.getMessage(), e);
             e.printStackTrace();

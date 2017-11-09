@@ -1,7 +1,9 @@
 package com.qf.ddshop.dao;
 
+import com.qf.ddshop.common.dto.Order;
 import com.qf.ddshop.common.dto.Page;
 import com.qf.ddshop.pojo.vo.TbItemCustom;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,9 +19,10 @@ public interface TbItemCustomMapper {
 
     /**
      * 查询指定页码显示记录集合
+     * 这是mybatis是注解
      * @param page
      * @return
      */
-    List<TbItemCustom> listItemsByPage(Page page);
+    List<TbItemCustom> listItemsByPage(@Param("page") Page page, @Param("order")Order order);
 
 }

@@ -1,5 +1,6 @@
 package com.qf.ddshop.service;
 
+import com.qf.ddshop.common.dto.Order;
 import com.qf.ddshop.common.dto.Page;
 import com.qf.ddshop.common.dto.Result;
 import com.qf.ddshop.pojo.po.TbItem;
@@ -17,7 +18,7 @@ public interface ItemService {
      * @param page
      * @return
      */
-    Result<TbItemCustom> listItemsByPage(Page page);
+    Result<TbItemCustom> listItemsByPage(Page page, Order order);
 
 //    批量修改
     int updateBatch(List<Long> ids);

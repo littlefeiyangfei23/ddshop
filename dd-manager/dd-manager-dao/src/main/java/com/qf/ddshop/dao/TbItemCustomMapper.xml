@@ -16,13 +16,21 @@
   </select>
 
   <!--在对应的dao接口里面，选择类名，选择Copy Reference,之后粘贴到这里，结果是权限定名-->
-  <select id="listItemsByPage" parameterType="com.qf.ddshop.common.dto.Page" resultType="com.qf.ddshop.pojo.vo.TbItemCustom">
+  <select id="listItemsByPage"  resultType="com.qf.ddshop.pojo.vo.TbItemCustom">
     SELECT
     <include refid="Base_Column_List" />
     FROM tb_item i
     LEFT JOIN tb_item_cat c ON i.cid = c.id
     where i.status != 3
-    ORDER BY i.id DESC
-    LIMIT #{offset},#{rows}
+    <choose>
+      <when test="order != null and order.sort != null and order.order != null">
+--         中文排序解决
+        ORDER BY  CONVERT(i.${order.sort} USING gbk)  ${order.order}
+      </when>
+      <otherwise>
+        ORDER BY i.id DESC
+      </otherwise>
+    </choose>
+    LIMIT #{page.offset},#{page.rows}
   </select>
 </mapper>

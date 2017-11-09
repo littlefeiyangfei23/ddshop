@@ -141,7 +141,7 @@
                     $.post(
                         //url:请求后台的哪个地址来进行处理，相当于url,String类型,这个参数是不可缺少的
                         'items/batchRemove',
-                        //data:从前台提交哪些数据给后台处理，相当于data，Object类型
+                        //data:从前台提交哪些数据给后台处理，相当于data，Object类型{'key':value}
                         {'ids[]':ids},
                         //callback:后台处理成功的回调函数，相当于success，function类型
                         function(data){
@@ -157,6 +157,8 @@
     }];
 
     $('#dg').datagrid({
+        //允许了多列排序
+        multiSort:true,
 //        添加一个工具栏
         toolbar:toolbar,
 //        这个路径下传回来的数据是JSON
@@ -180,7 +182,7 @@
             //field title width列属性，ck是name，随便起的
             {field: 'ck', checkbox: true},
             {field: 'id', title: '商品编号', width: 100},
-            {field: 'title', title: '商品名称', width: 100},
+            {field: 'title', title: '商品名称', width: 100,sortable:true},
             {field: 'sellPoint', title: '卖点', width: 100},
             {
                 field: 'status', title: '状态', width: 100, formatter: function (value, row, index) {
@@ -212,7 +214,7 @@
             }
             },
             {field: 'catName', title: '分类名称', width: 100},
-            {field: 'price', title: '价格', width: 100},
+            {field: 'price', title: '价格', width: 100,sortable:true},
             {field: 'created', title: '创建时间', width: 100,formatter:function(value,row,index){
 //                不会找monment.js官网
                 return moment(value).format('LL');
