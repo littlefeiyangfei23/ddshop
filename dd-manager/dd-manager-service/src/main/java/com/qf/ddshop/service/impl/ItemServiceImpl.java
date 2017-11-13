@@ -8,13 +8,16 @@ import com.qf.ddshop.dao.TbItemMapper;
 import com.qf.ddshop.pojo.po.TbItem;
 import com.qf.ddshop.pojo.po.TbItemExample;
 import com.qf.ddshop.pojo.vo.TbItemCustom;
+import com.qf.ddshop.pojo.vo.TbItemQuery;
 import com.qf.ddshop.service.ItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ItemServiceImpl  implements ItemService {
@@ -52,16 +55,24 @@ public class ItemServiceImpl  implements ItemService {
     }
 
     @Override
-    public Result<TbItemCustom> listItemsByPage(Page page, Order order) {
+    public Result<TbItemCustom> listItemsByPage(Page page, Order order,TbItemQuery query) {
         Result<TbItemCustom> result = null;
+
         try {
+//            0 创建一个Map封装前台传过来的参数
+            Map<String,Object> map=new HashMap<String,Object>();
+            map.put("page",page);
+            map.put("order",order);
+            map.put("query",query);
+//            Map<String,Object>
             //1 创建一个响应参数实体类
             result = new Result<TbItemCustom>();
             //2 对total进行设值(符合条件的总记录数)
-            int total = itemCustomDao.countItems();
+//            这里的参数是query的话，就报错了，错过一次
+            int total = itemCustomDao.countItems(map);
             result.setTotal(total);
             //3 对rows进行设值(指定页码显示记录集合)
-            List<TbItemCustom> list = itemCustomDao.listItemsByPage(page,order);
+            List<TbItemCustom> list = itemCustomDao.listItemsByPage(map);
             result.setRows(list);
         }catch (Exception e) {
             logger.error(e.getMessage(), e);

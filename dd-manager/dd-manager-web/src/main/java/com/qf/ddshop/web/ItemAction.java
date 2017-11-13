@@ -6,6 +6,7 @@ import com.qf.ddshop.common.dto.Page;
 import com.qf.ddshop.common.dto.Result;
 import com.qf.ddshop.pojo.po.TbItem;
 import com.qf.ddshop.pojo.vo.TbItemCustom;
+import com.qf.ddshop.pojo.vo.TbItemQuery;
 import com.qf.ddshop.service.ItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,10 +57,10 @@ public class ItemAction {
 
     @ResponseBody
     @RequestMapping("/items")
-    public Result<TbItemCustom> listItemsByPage(Page page, Order order){
+    public Result<TbItemCustom> listItemsByPage(Page page, Order order,TbItemQuery query){
         Result<TbItemCustom> list = null;
         try {
-            list = itemService.listItemsByPage(page,order);
+            list = itemService.listItemsByPage(page,order,query);
         }catch (Exception e) {
             logger.error(e.getMessage(), e);
             e.printStackTrace();
@@ -110,6 +111,14 @@ public class ItemAction {
             e.printStackTrace();
         }
         return i;
+    }
+
+    @ResponseBody
+    @RequestMapping("/item")
+    public int saveItem(TbItem tbItem,String content){
+        int i=0;
+        return i;
+
     }
 
 

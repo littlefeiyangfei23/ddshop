@@ -9,10 +9,23 @@
     c.name as catName
   </sql>
 
+    <sql id="Where_Clause" >
+        <where>
+            i.status != 3
+            <if test="query != null and query.title != null and query.title != '' ">
+                and i.title like '%${query.title}%'
+            </if>
+            <if test="query != null and query.status != null and query.status != 0 ">
+                and i.status = #{query.status}
+            </if>
+        </where>
+    </sql>
+
   <select id="countItems" resultType="_int">
     select count(1)
-    from tb_item
-    where status != 3
+--       加了下面这个代码块，忘了加i,报错
+    from tb_item i
+      <include refid="Where_Clause"/>
   </select>
 
   <!--在对应的dao接口里面，选择类名，选择Copy Reference,之后粘贴到这里，结果是权限定名-->
@@ -21,7 +34,7 @@
     <include refid="Base_Column_List" />
     FROM tb_item i
     LEFT JOIN tb_item_cat c ON i.cid = c.id
-    where i.status != 3
+   <include refid="Where_Clause"/>
     <choose>
       <when test="order != null and order.sort != null and order.order != null ">
 

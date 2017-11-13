@@ -61,6 +61,12 @@
     moment.locale('zh-cn');
 </script>
 
+<%--路径如此的开头是为了与action路径保持一致--%>
+<!-- ueditor配置文件 -->
+<script type="text/javascript" src="js/ueditor/ueditor.config.js"></script>
+<!-- ueditor编辑器源码文件 -->
+<script type="text/javascript" src="js/ueditor/ueditor.all.js"></script>
+
 
 <!-- 自定义脚本 -->
 <script src="js/common.js"></script>
