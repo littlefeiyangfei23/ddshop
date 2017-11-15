@@ -35,7 +35,25 @@ var ddshop = {
             }
 
 
-        }
+        },
+
+    // 下面的方法还可以优化
+       /* closeTab:function (){
+            if($("#tab").tabs("exists","查询商品")){
+                $("#tab").tabs("close","查询商品");
+            }
+
+            if($("#tab").tabs("exists","新增商品")){
+                $("#tab").tabs("close","新增商品");
+            }
+
+            this.addTabs("查询商品","item-list");
+
+        }*/
+       closeTabs:function (title) {
+           $('#tab').tabs('close',title);
+
+       }
 
 };
 

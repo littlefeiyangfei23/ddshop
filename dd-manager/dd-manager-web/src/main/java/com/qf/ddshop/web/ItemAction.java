@@ -57,7 +57,7 @@ public class ItemAction {
 
     @ResponseBody
     @RequestMapping("/items")
-    public Result<TbItemCustom> listItemsByPage(Page page, Order order,TbItemQuery query){
+    public Result<TbItemCustom> listItemsByPage(Page page, Order order, TbItemQuery query){
         Result<TbItemCustom> list = null;
         try {
             list = itemService.listItemsByPage(page,order,query);
@@ -113,12 +113,19 @@ public class ItemAction {
         return i;
     }
 
+//   string后面的参数content与item-add.jsp中编辑器的那么是一样的
+//    11.14 保存商品，3个表
     @ResponseBody
     @RequestMapping("/item")
-    public int saveItem(TbItem tbItem,String content){
-        int i=0;
+    public int saveItem(TbItem tbItem,String content,String paramData){
+        int i = 0;
+        try {
+            i = itemService.saveItem(tbItem, content,paramData);
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
         return i;
-
     }
 
 

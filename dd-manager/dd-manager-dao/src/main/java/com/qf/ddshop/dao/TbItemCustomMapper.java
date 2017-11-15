@@ -1,10 +1,6 @@
 package com.qf.ddshop.dao;
 
-import com.qf.ddshop.common.dto.Order;
-import com.qf.ddshop.common.dto.Page;
 import com.qf.ddshop.pojo.vo.TbItemCustom;
-import com.qf.ddshop.pojo.vo.TbItemQuery;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;

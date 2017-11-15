@@ -89,18 +89,71 @@
             //在表单提交之前触发
             onSubmit:function () {
                 <%--${this}表示form表单--%>
+
+                //将表单上价格单位从元转为分
+                $('#price').val($('#priceView').val()*100);
+
+
+                //获取参数规格部分，把数据转换成JSON
+                var paramsJson = [];
+                var $liList = $('#itemAddForm .paramsShow li');
+                $liList.each(function (i, e) {
+                    $group = $(e).find('.group');
+                    var groupName = $group.text();
+
+                    var params = [];
+                    var $trParams = $(e).find('tr').has('td.param');
+                    $trParams.each(function (_i, _e) {
+                        var $oneDataTr = $(_e);
+                        var $keyTd = $oneDataTr.find('.param');
+                        var $valueInput = $keyTd.next('td').find('input');
+                        var key = $keyTd.text();
+                        var value = $valueInput.val();
+
+                        var _o = {
+                            k: key,
+                            v: value
+                        };
+                        params.push(_o);
+                    });
+                    var o = {};
+                    o.group = groupName;
+                    o.params = params;
+                    paramsJson.push(o);
+                });
+                paramsJson = JSON.stringify(paramsJson);
+//                把数据转换成JSON对象
+                $('#paramData').val(paramsJson);
+
+
+
                 //做表单校验，表单上所有字段全部校验通过才能返回true，才会提交表单，
                 //如果有任意一个字段没有校验通过，返回false，不会提交表单
                 return $(this).form('validate');
             },
-            //后台处理成功之后的回调函数
-            success:function(){
-                console.log('success');
+            //表单提交成功后触发,data是action中方法返回的值。,String类型
+            success:function(data){
+//                console.log(typeof (data)+'123');
+//                console.log('success');
+//
+                if(data > 0) {
+//                    console.log(typeof (data));//String类型的
+                    $.messager.alert('温馨提示','恭喜！添加商品成功！');
+                    //下面这行代码是可以关闭窗口的
+//                    $("#tab").tabs('close','新增商品');
+                    ddshop.closeTabs('新增商品');
+                    ddshop.addTabs('查询商品', 'item-list');
+                    //这也是一个关闭新窗口的方式
+
+
+
+                }
             }
         });
     }
 
-
+   //初始化之前删除原有的容器
+    UE.delEditor('container');
     //实例化富文本编辑器
     var ue = UE.getEditor('container');
 
@@ -130,6 +183,60 @@
             if (!isLeaf) {
                 $.messager.alert('警告', '请选中最终的类别！', 'warning');
                 return false;
+            }else {
+//       F12显示这个node是一个Object,
+//                debugger;
+//                console.log(node);
+                //如果是叶子节点就发送ajax请求，请求查询tb_item_param,
+                // 选中哪个叶子节点，把那个节点做为参数传过来
+//                这里第4个参数写了JSON，必须返回来一个Json参数
+                $.get(
+                    //url
+                    'itemParam/query/'+node.id,
+                    //success
+                    function(data){
+                        //console.log(typeof(data));
+//                        选中第二个td
+                        var $outerTd = $('#itemAddForm .paramsShow td').eq(1);
+                        var $ul = $('<ul>');
+                        $outerTd.empty().append($ul);
+//                        data是个对象，
+                        if (data) {
+                            var paramData = data.paramData;
+//                            String 转化为 对象
+                            paramData = JSON.parse(paramData);
+                            //遍历分组
+                            $.each(paramData, function (i, e) {
+                                var groupName = e.group;
+                                var $li = $('<li>');
+                                var $table = $('<table>');
+                                var $tr = $('<tr>');
+                                var $td = $('<td colspan="2" class="group">' + groupName + '</td>');
+
+                                $ul.append($li);
+                                $li.append($table);
+                                $table.append($tr);
+                                $tr.append($td);
+
+                                //遍历分组项
+                                if (e.params) {
+                                    $.each(e.params, function (_i, paramName) {
+                                        var _$tr = $('<tr><td class="param">' + paramName + '</td><td><input></td></tr>');
+                                        $table.append(_$tr);
+                                    });
+                                }
+                            });
+
+                            $("#itemAddForm .paramsShow").show();
+                        } else {
+
+                            $("#itemAddForm .paramsShow").hide();
+                            $("#itemAddForm .paramsShow td").eq(1).empty();//第二个td
+                        }
+
+
+                    }
+                );
             }
 
         }
