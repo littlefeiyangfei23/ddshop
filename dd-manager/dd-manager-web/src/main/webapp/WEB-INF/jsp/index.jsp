@@ -73,6 +73,15 @@
 <!-- 自定义js -->
 <script>
     ddshop.registerMenuEvent();
+
+    UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+    UE.Editor.prototype.getActionUrl = function(action) {
+        if (action == 'uploadimage') {
+            return 'http://localhost:8080/ddshop/file/upload';
+        }else {
+            return this._bkGetActionUrl.call(this, action);
+        }
+    }
     /*$(function () {
         //约定大于配置：jquery对象前面加上$,如果是DOM对象不需要加$
         var $tree = $('#menu .easyui-tree');

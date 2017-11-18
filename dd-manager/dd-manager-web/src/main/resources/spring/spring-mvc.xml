@@ -41,8 +41,11 @@
 
     <!--静态资源解析-->
     <!--访问js文件下的js文件，有如下设置，就可以直接访问，不用访问action-->
+    <!--/ 表示的是webapp-->
     <mvc:resources mapping="/js/**" location="/js/"/>
+
     <mvc:resources mapping="/css/**" location="/css/"/>
     <mvc:resources mapping="/images/**" location="/images/"/>
+    <mvc:resources mapping="/ueditor/**" location="/ueditor/"/>
 
 </beans>

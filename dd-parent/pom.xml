@@ -12,6 +12,7 @@
     <modules>
         <module>../dd-common</module>
         <module>../dd-manager</module>
+        <module>../dd-upload</module>
     </modules>
 
     <packaging>pom</packaging>

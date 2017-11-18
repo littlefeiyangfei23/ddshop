@@ -155,7 +155,12 @@
    //初始化之前删除原有的容器
     UE.delEditor('container');
     //实例化富文本编辑器
-    var ue = UE.getEditor('container');
+    var ue = UE.getEditor('container', {
+        initialFrameWidth: '100%',
+        initialFrameHeight: '300',
+//        这个serverUrl会覆盖ueditor.config.js里面的serverURL
+        serverUrl:'file/upload'
+    });
 
     //加载商品类目的树形下拉框
     $('#cid').combotree({
