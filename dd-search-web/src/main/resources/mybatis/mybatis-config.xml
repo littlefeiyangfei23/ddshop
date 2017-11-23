@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+ <!--现在这里什么都没有，是为了以后可以方便扩展，扩展意识-->
+ <!--dtd约束，xsd是spring.xml是约束文件-->
+    <!--<settings>-->
+ <!--true让数据表中字段属性变为驼峰命名规则，体现在实体类中，默认为false-->
+        <!--<setting name="mapUnderscoreToCamelCase" value="true"/>-->
+    <!--</settings>-->
+</configuration>

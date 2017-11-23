@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class JedisTest {
 
-    @Test
+   /* @Test
     public void testJedis01(){
         Jedis jedis=new Jedis("10.31.161.48",6379);
         jedis.set("name","wyf");
@@ -44,5 +44,5 @@ public class JedisTest {
         jedisCluster.set("name","哥哥");
         System.out.println(jedisCluster.get("name"));
         jedisCluster.close();
-    }
+    }*/
 }

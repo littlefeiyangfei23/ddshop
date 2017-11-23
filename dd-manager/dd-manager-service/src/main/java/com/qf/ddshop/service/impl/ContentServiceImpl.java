@@ -23,6 +23,7 @@ public class ContentServiceImpl implements ContentService {
     @Autowired
     private TbContentMapper contentDao;
 
+
     @Autowired
     private JedisClient jedisClient;
     @Override

@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-
+/*
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring/spring-dao-test.xml"})
+@ContextConfiguration({"classpath:spring/spring-dao-test.xml","classpath:spring/spring-solr-test.xml"})
 public class TbUserMapperTest {
 
     //    这个报红不要紧，MapperScannerConfigurer自动实现
@@ -22,4 +22,4 @@ public class TbUserMapperTest {
         System.out.println(tbUser);
     }
 
-}
+}*/
