@@ -34,7 +34,7 @@ public interface ItemService {
      * @param content 商品描述
      * @return 受到影响的行数
      */
-    int saveItem(TbItem tbItem, String content,String paramData);
+    Long saveItem(TbItem tbItem, String content,String paramData);
 
     Result<TbItemCustom> listItemsByPage(Page page, Order order, TbItemQuery query);
 }

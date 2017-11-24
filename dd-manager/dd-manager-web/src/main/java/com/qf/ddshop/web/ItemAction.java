@@ -1,6 +1,7 @@
 package com.qf.ddshop.web;
 
 
+import com.qf.ddshop.common.dto.MessageResult;
 import com.qf.ddshop.common.dto.Order;
 import com.qf.ddshop.common.dto.Page;
 import com.qf.ddshop.common.dto.Result;
@@ -12,9 +13,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import javax.jms.*;
 import java.util.List;
 
 
@@ -27,6 +32,12 @@ public class ItemAction {
 
     @Autowired
     private ItemService itemService;
+//按类型注入
+    @Autowired
+    private JmsTemplate jmsTemplate;
+//默认按名字注入
+    @Resource
+    private Destination topicDestination;
 
 //序列化成JSON
     @ResponseBody
@@ -117,16 +128,28 @@ public class ItemAction {
 //    11.14 保存商品，3个表
     @ResponseBody
     @RequestMapping("/item")
-    public int saveItem(TbItem tbItem,String content,String paramData){
-        int i = 0;
+    public MessageResult saveItem(TbItem tbItem,String content,String paramData){
+        MessageResult mr = new MessageResult();
         try {
-            i = itemService.saveItem(tbItem, content,paramData);
+//            保存商品,用Long接收返回的itemId
+            final Long itemId = itemService.saveItem(tbItem, content,paramData);
+            //发送消息
+            jmsTemplate.send(topicDestination, new MessageCreator() {
+                @Override
+                public Message createMessage(Session session) throws JMSException {
+                    TextMessage textMessage = session.createTextMessage(itemId + "");
+                    return textMessage;
+                }
+            });
+            mr.setSuccess(true);
+            mr.setMessage("成功新增一个商品");
         }catch (Exception e){
             logger.error(e.getMessage(), e);
             e.printStackTrace();
         }
-        return i;
+        return mr;
     }
+
 
 
 

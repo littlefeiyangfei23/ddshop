@@ -11,6 +11,8 @@ import java.util.Map;
  */
 public interface TbItemSearchCustomMapper {
 
-
+//查询所有商品封装到Bean中
     List<TbItemSearchCustom> listSearchItems();
+//根据ID查询商品封装到Bean中
+    TbItemSearchCustom getById(long itemId);
 }

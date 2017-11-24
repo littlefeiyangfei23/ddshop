@@ -1,3 +1,4 @@
+/*
 package com.qf.ddshop.activemq;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -79,3 +80,4 @@ public class ActivemqP2STest {
         connection.close();
     }
 }
+*/

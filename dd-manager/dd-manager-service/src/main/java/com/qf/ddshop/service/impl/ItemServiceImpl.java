@@ -186,18 +186,18 @@ public class ItemServiceImpl  implements ItemService {
 //    3张表要处理
     @Transactional
     @Override
-    public int saveItem(TbItem tbItem, String content,String paramData) {
-        int i = 0;
+    public Long saveItem(TbItem tbItem, String content,String paramData) {
+        Long itemId= null;
         try {
             //这个方法中需要处理两张表格tb_item tb_item_desc，  tb_item-param-item
             //调用工具类生成商品的ID
             //处理tb_item
-            Long itemId = IDUtils.getItemId();
+            itemId = IDUtils.getItemId();
             tbItem.setId(itemId);
             tbItem.setStatus((byte)2);
             tbItem.setCreated(new Date());
             tbItem.setUpdated(new Date());
-            i = itemDao.insert(tbItem);
+            int i = itemDao.insert(tbItem);
             //处理tb_item_desc
             TbItemDesc desc = new TbItemDesc();
             desc.setItemId(itemId);
@@ -217,6 +217,6 @@ public class ItemServiceImpl  implements ItemService {
             logger.error(e.getMessage(), e);
             e.printStackTrace();
         }
-        return i;
+        return itemId;
     }
 }

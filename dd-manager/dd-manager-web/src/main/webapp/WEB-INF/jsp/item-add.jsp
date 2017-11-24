@@ -133,10 +133,12 @@
             },
             //表单提交成功后触发,data是action中方法返回的值。,String类型
             success:function(data){
-//                console.log(typeof (data)+'123');
-//                console.log('success');
+                console.log(typeof (data)+'123');   //String
+                console.log(data);//{"success":true,"message":"成功新增一个商品","data":null}
 //
-                if(data > 0) {
+                var obj=JSON.parse(data);
+                console.log(obj);//{success: true, message: "成功新增一个商品", data: null}
+                if(obj.success) {
 //                    console.log(typeof (data));//String类型的
                     $.messager.alert('温馨提示','恭喜！添加商品成功！');
                     //下面这行代码是可以关闭窗口的
@@ -181,7 +183,7 @@
 //        node是传进来 的参数
         onBeforeSelect: function (node) {
 //            这里打印的是选中的那条商品类别信息，tb_item_cat
-            console.log(node);
+//            console.log(node);
             //判断选中节点是否为叶子节点，如果是，返回true
             var isLeaf = $('#cid').tree('isLeaf', node.target);
             //如果后台管理员选中的不是叶子节点的话，给出警告框

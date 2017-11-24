@@ -18,10 +18,7 @@
         <groupId>org.apache.activemq</groupId>
         <artifactId>activemq-all</artifactId>
     </dependency>
-    <dependency>
-        <groupId>junit</groupId>
-        <artifactId>Junit</artifactId>
-    </dependency>
+
     <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
