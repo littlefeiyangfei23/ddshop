@@ -3,6 +3,10 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/dd-activemq" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dd-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dd-dubbo-consumer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dd-dubbo-provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dd-freemarket" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dd-item-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dd-lucene" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dd-manager" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dd-manager/dd-manager-dao" charset="UTF-8" />
@@ -13,6 +17,7 @@
     <file url="file://$PROJECT_DIR$/dd-parent" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dd-portal-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dd-search-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dd-sso-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dd-upload" charset="UTF-8" />
   </component>
 </project>

@@ -17,6 +17,11 @@
         <module>../dd-lucene</module>
         <module>../dd-search-web</module>
         <module>../dd-activemq</module>
+        <module>../dd-sso-web</module>
+        <module>../dd-freemarket</module>
+        <module>../dd-item-web</module>
+        <module>../dd-dubbo-consumer</module>
+        <module>../dd-dubbo-provider</module>
     </modules>
 
     <packaging>pom</packaging>

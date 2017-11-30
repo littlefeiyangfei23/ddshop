@@ -284,11 +284,11 @@
 //                    起名字的
  //                console.group();
 //                数据库表中查出来的值
-//                console.log(value);
+                console.log(value);
 //                包含了对象信息
-//                console.log(row);
+                console.log(row);
 //                这是信息索引信息。
-//                console.log(index)
+                console.log(index)
 //             ;和console.group();做为一个组来打印
 //                console.groupEnd();
                 switch (value) {
